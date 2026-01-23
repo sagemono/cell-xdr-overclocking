@@ -620,3 +620,15 @@ Boot Phase "0x400" (System Running)
                     ├── Validates against internal whitelist
                     └── Returns error if not whitelisted
 ```
+
+## Credits
+
+- [Nascar1243](https://youtube.com/@nascar1243) - Figuring out the offets for the CELL clock generator registers
+- [aomsin2526](https://github.com/aomsin2526/) - For his [CellOCPico](https://github.com/aomsin2526/CellOCPico) project and spearheading the idea for this to be possible without requiring external hardware
+- [RIP Felix](https://www.youtube.com/@ripfelix3020) - Attempting different values for the CELL clock generator registers
+- [villahed94](https://www.youtube.com/@villahed94/) - Attempting different values for the CELL clock generator registers
+- [Sampsonay](https://www.youtube.com/@Sampsonay/) - Attempting different values for the CELL clock generator registers
+- gypsy - Attempting different values for the CELL clock generator registers
+- rgbeter - Attempting different values for the CELL clock generator registers
+- [sage](https://codeberg.org/derg/) - This document, extensive reverse engineering of the syscon firmware
+---
