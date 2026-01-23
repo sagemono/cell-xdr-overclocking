@@ -623,6 +623,7 @@ Boot Phase "0x400" (System Running)
 
 ## Credits
 
+- [M4j0r](https://x.com/MinaRalwasser/) - For discovering that CELL can be overclocked in the first place via a DECR-1000A Reference Tool back in [2021](https://x.com/MinaRalwasser/status/1458862608384155650). 
 - [Nascar1243](https://youtube.com/@nascar1243) - Figuring out the offets for the CELL clock generator registers
 - [aomsin2526](https://github.com/aomsin2526/) - For his [CellOCPico](https://github.com/aomsin2526/CellOCPico) project and spearheading the idea for this to be possible without requiring external hardware
 - [RIP Felix](https://www.youtube.com/@ripfelix3020) - Attempting different values for the CELL clock generator registers
