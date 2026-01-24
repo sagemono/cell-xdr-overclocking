@@ -1,8 +1,10 @@
 # PS3 CELL/XDR Overclocking Research and Reverse Engineering
 
-## Project Overview
+---
+## Disclaimer: This is not a guide in any way shape or form, this is only a proof of concept. There is a team working behind this and is still in the experimental stage. This may cause irreversible damage to your system and should not be performed by the average user. We are not responsible for any damaged systems. 
+---
 
-## Disclaimer: This is not a guide in any way, this is still a work in progress and should not be used by causal users.
+## Project Overview
 
 This document details the reverse engineering of the PlayStation 3 syscon clock generation subsystem, specifically focusing on CELL and XDR clock configuration. The research resulted in the discovery of software based overclocking capabilities on retail PS3 consoles through NVS modification.
 
