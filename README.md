@@ -109,7 +109,7 @@ struct device_context {
 
 (Sherwood)
 | NVS Offset | Size | Register | Default | Description |
-|------------|------|--------|----------|---------|-------------|
+|------------|------|----------|---------|-------------|
 | 0x61 | 1 | 5 | 0x84 | XDR clock generator register 5 |
 | 0x62 | 1 | 6 | 0x16 | XDR clock generator register 6 |
 | 0x63 | 1 | 5 | 0x84 | CELL clock generator register 5 |
