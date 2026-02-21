@@ -52,8 +52,8 @@ The PS3 COK-001 (CECHA) motherboard uses the following clock generation hardware
               │                               │
               ▼                               ▼
 ┌─────────────────────────────┐ ┌─────────────────────────────────┐
-│ IC5003 - ICS9218AGLFT       │ │ IC5002/5004 - ICS9218AGLFT      │
-│ CELL Clock Generator        │ │ XDR Clock Generator             │
+│ IC5002/4 - ICS9218AGLFT     │ │ IC5003 - ICS9218AGLFT           │
+│ XDR Clock Generator         │ │ Cell Clock Generator            │
 │ (cell_device_slot: 0x42080) │ │ (xdr_context_id_probable)       │
 │                             │ │                                 |
 │ NVS 0x3128 → Register 5     │ │ NVS 0x312C → Register 5         │
@@ -64,7 +64,7 @@ The PS3 COK-001 (CECHA) motherboard uses the following clock generation hardware
                │                                 │
                ▼                                 ▼
 ┌─────────────────────────────┐ ┌─────────────────────────────────┐
-│           CELL BE           │ │             XDR DRAM            │
+│           XDR DRAM          │ │             CELL BE             │
 │   Internal PLL: 8× mult     │ │      Internal PLL: 8× mult      │
 │                             │ │                                 │
 │   400 MHz × 8 = 3.2 GHz     │ │       400 MHz × 8 = 3.2 GHz     │
@@ -102,10 +102,10 @@ struct device_context {
 | NVS Offset | Size | Device | Register | Default | Description |
 |------------|------|--------|----------|---------|-------------|
 | 0x3122 | 1 | Master Osc | 0 | 0x20 | Master oscillator config (bits 6-4 select frequency) |
-| 0x3128 | 1 | IC5003 | 5 | 0x84 | CELL clock generator register 5 |
-| 0x3129 | 1 | IC5003 | 6 | 0x16 | CELL clock generator register 6 |
-| 0x312C | 1 | IC5002/4 | 5 | 0x84 | XDR clock generator register 5 |
-| 0x312D | 1 | IC5002/4 | 6 | 0x16 | XDR clock generator register 6 |
+| 0x3128 | 1 | IC5002/4 | 5 | 0x84 | XDR clock generator register 5 |
+| 0x3129 | 1 | IC5002/4 | 6 | 0x16 | XDR clock generator register 6 |
+| 0x312C | 1 | IC5003 | 5 | 0x84 | CELL clock generator register 5 |
+| 0x312D | 1 | IC5003 | 6 | 0x16 | CELL clock generator register 6 |
 
 (Sherwood)
 | NVS Offset | Size | Register | Default | Description |
