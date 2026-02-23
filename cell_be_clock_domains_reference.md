@@ -111,7 +111,7 @@ FlexIO's clock determines the data rate of the I/O bus between Cell and RSX (and
 
 ### 2.3 Is FlexIO Relevant to Overclocking at All?
 
-Yes, but only as a stability constraint. From the main overclock research writeup [README.md](https://github.com/sagemono/cell-xdr-overclocking/blob/main/README.md):
+Yes, but only as a stability constraint. From the main overclock research writeup [here](https://github.com/sagemono/cell-xdr-overclocking/blob/main/README.md):
 
 > The CELL processor communicates with XDR memory through the FlexIO interface. If the frequency difference between CELL and XDR exceeds approximately 800 MHz, the interface becomes unstable and fails during link initialization.
 
@@ -313,7 +313,7 @@ From the DECR `boardconfig` command and NVS analysis, these are *clock generator
 XCG2 BE 5:84 6:16  <- This is at NVS 0x3068-0x3069 on DECR
 ```
 
-From the syscon firmware's frequency lookup table (README(2).md), the combined key `0x8416` maps to exactly 400,000,000 Hz. The full table shows 25 frequency entries ranging from 300 MHz (0x8410) to 667 MHz (0x0426). These are the clock generator's output frequencies, NOT the Cell's internal PLL multiplier settings.
+From the syscon firmware's frequency lookup table [here](https://github.com/sagemono/cell-xdr-overclocking/tree/main?tab=readme-ov-file#clock-generator-table-0x40188-25-entries), the combined key `0x8416` maps to exactly 400,000,000 Hz. The full table shows 25 frequency entries ranging from 300 MHz (0x8410) to 667 MHz (0x0426). These are the clock generator's output frequencies, NOT the Cell's internal PLL multiplier settings.
 
 ---
 
