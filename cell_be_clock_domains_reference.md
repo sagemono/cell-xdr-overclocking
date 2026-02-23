@@ -275,13 +275,13 @@ This second path is accessed through the `Psbd_SetBePll` function in the syscon 
 
 Experimental data from DECR-1000A testing:
 
-**Normal speed configuration:**
+**3.2GHz configuration:**
 ```
 w 3068 84 16           <- XCG2 CELL reg5=0x84, reg6=0x16 (400 MHz refclk)
 w 3070 FF FF FF FF FF FF FF FF FF   <- BE_PLL override DISABLED
 ```
 
-**Fast speed configuration:**
+**4.8GHz configuration:**
 ```
 w 3068 FF FF           <- XCG2 bypassed
 w 3070 71 47 6A 81 63 48 00 00 00   <- BE_PLL override with custom PLL config
