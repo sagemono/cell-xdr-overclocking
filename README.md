@@ -1,7 +1,9 @@
 # PS3 CELL/XDR Overclocking Research and Reverse Engineering
 
 ---
-## Disclaimer: This is not a guide in any way shape or form, this is only a proof of concept. There is a team working behind this and is still in the experimental stage. This may cause irreversible damage to your system and should not be performed by the average user. We are not responsible for any damaged systems. 
+## Disclaimer: This is not a guide in any way shape or form, this is only a proof of concept. There is a team working behind this and is still in the experimental stage. This may cause irreversible damage to your system and should not be performed by the average user. We are not responsible for any damaged systems.
+
+Please be aware that this is currently only functional on CECH-2001A PS3 models and prior (and there may be exceptions even among those, which we are currently investigating). Please also note that, depending on Cell process node (90nm, 65nm, 45nm), different overlock ceilings will be achievable, and in most cases, overvolting will be required to achieve them. If you're following along, you're doing so at your own risk.
 ---
 
 ## Project Overview
@@ -14,8 +16,9 @@ This document details the reverse engineering of the PlayStation 3 syscon clock 
 ### Achievements
 - Decoded the complete clock frequency lookup table (25 entries)
 - Mapped NVS offsets controlling clock generators
-- Identified lv0 firmware whitelist restrictions (this can potentially be solved on winning the silicon lottery and chips with a differnet revision, 90/65/40/28nm)
+- Identified lv0 firmware whitelist restrictions (this can potentially be solved on winning the silicon lottery and chips with a different revision, 90/65/45nm)
 - Achieved semi stable 4.0 GHz CELL overclock (25% over stock 3.2 GHz)
+- Achieved stable 4.8 GHz CELL overclock (50% over stock 3.2 GHz) on CECH-2001A, 4.66 GHz on CECHK01
 - Documented XDR clock limitations and CELL/XDR ratio requirements
 
 ---
@@ -125,16 +128,16 @@ nvs_read(0x3122, v5, 1);
 if (v5[0] == 0xFF) v5[0] = 0x20;  // Default master osc config
 
 nvs_read(0x3128, v5, 1);
-if (v5[0] == 0xFF) v5[0] = 0x84;  // Default CELL reg5
-
-nvs_read(0x3129, v5, 1);
-if (v5[0] == 0xFF) v5[0] = 0x16;  // Default CELL reg6 (22 decimal)
-
-nvs_read(0x312C, v5, 1);
 if (v5[0] == 0xFF) v5[0] = 0x84;  // Default XDR reg5
 
+nvs_read(0x3129, v5, 1);
+if (v5[0] == 0xFF) v5[0] = 0x16;  // Default XDR reg6 (22 decimal)
+
+nvs_read(0x312C, v5, 1);
+if (v5[0] == 0xFF) v5[0] = 0x84;  // Default CELL reg5
+
 nvs_read(0x312D, v5, 1);
-if (v5[0] == 0xFF) v5[0] = 0x16;  // Default XDR reg6
+if (v5[0] == 0xFF) v5[0] = 0x16;  // Default CELL reg6
 ```
 
 ---
@@ -161,12 +164,12 @@ int __fastcall sub_2DC9E(int a1, int a2, int a3, int a4)
         result = sub_3851C(&master_clock_oscillator_device_slot, 0, 0x7F, LOBYTE(v5[0]));
         
         if (!result) {
-            // Initialize CELL clock generator
+            // Initialize XDR clock generator
             LOBYTE(v5[0]) = 0;
             result = sub_38614(&cell_device_slot, 0, 3, 0);  // Init register 0
             
             if (!result) {
-                // Configure CELL reg5 (NVS 0x3128)
+                // Configure XDR reg5 (NVS 0x3128)
                 result = nvs_read(0x3128, v5, 1);
                 if (!result) {
                     if (LOBYTE(v5[0]) == 0xFF)
@@ -174,7 +177,7 @@ int __fastcall sub_2DC9E(int a1, int a2, int a3, int a4)
                     result = sub_38614(&cell_device_slot, 5, 0xFF, LOBYTE(v5[0]));
                     
                     if (!result) {
-                        // Configure CELL reg6 (NVS 0x3129)
+                        // Configure XDR reg6 (NVS 0x3129)
                         result = nvs_read(0x3129, v5, 1);
                         if (!result) {
                             if (LOBYTE(v5[0]) == 0xFF)
@@ -674,7 +677,7 @@ Boot Phase "0x400" (System Running)
 - [RIP Felix](https://www.youtube.com/@ripfelix3020) - Attempting different values for the CELL clock generator registers
 - [villahed94](https://www.youtube.com/@villahed94/) - Attempting different values for the CELL clock generator registers
 - [Sampsonay](https://www.youtube.com/@Sampsonay/) - Attempting different values for the CELL clock generator registers
-- gypsy - Attempting different values for the CELL clock generator registers
+- [gypsy](https://www.github.com/losgatosbandidos/) - Attempting different values for the CELL clock generator registers
 - [RGBeter](https://x.com/RGBeter32X) - Attempting different values for the CELL clock generator registers
 - [sage](https://codeberg.org/derg/) - This document and extensive reverse engineering of the syscon firmware
 ---
