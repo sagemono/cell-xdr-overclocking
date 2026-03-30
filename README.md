@@ -3,17 +3,31 @@
 Reverse engineering of the PlayStation 3's clock generation, XDR memory timing control, and timebase systems. This research enables software-based CPU overclocking and XDR DRAM timing modification on retail PS3 consoles through Syscon NVS modification.
 
 ---
+<<<<<<< HEAD
 
 **Disclaimer:** This is not a guide. This is experimental research that may cause irreversible damage to your system. There is a team working behind this and it is still in the experimental stage. We are not responsible for any damaged systems. If you're following along, you're doing so at your own risk.
 
 Please be aware that this is currently only functional on CECH-2001A PS3 models and prior. Depending on Cell process node (90nm, 65nm, 45nm), different overclock ceilings will be achievable, and in most cases, overvolting will be required.
 
+=======
+## Disclaimer: This is not a guide in any way shape or form, this is only a proof of concept. There is a team working behind this and is still in the experimental stage. This may cause irreversible damage to your system and should not be performed by the average user. We are not responsible for any damaged systems. 
+>>>>>>> parent of 263183b (Update README.md with minor corrections and applicable models)
 ---
 
 ## Hardware
 
 - **Console Model**: CECHA00
+<<<<<<< HEAD
 - **XDR DRAM**: Elpida EDX5116ACSE-3C-E (256Mbit, x16, 8 banks, 3.2G C-bin)
+=======
+
+### Achievements
+- Decoded the complete clock frequency lookup table (25 entries)
+- Mapped NVS offsets controlling clock generators
+- Identified lv0 firmware whitelist restrictions (this can potentially be solved on winning the silicon lottery and chips with a differnet revision, 90/65/40/28nm)
+- Achieved semi stable 4.0 GHz CELL overclock (25% over stock 3.2 GHz)
+- Documented XDR clock limitations and CELL/XDR ratio requirements
+>>>>>>> parent of 263183b (Update README.md with minor corrections and applicable models)
 
 ---
 
@@ -124,16 +138,16 @@ nvs_read(0x3122, v5, 1);
 if (v5[0] == 0xFF) v5[0] = 0x20;  // Default master osc config
 
 nvs_read(0x3128, v5, 1);
-if (v5[0] == 0xFF) v5[0] = 0x84;  // Default XDR reg5
-
-nvs_read(0x3129, v5, 1);
-if (v5[0] == 0xFF) v5[0] = 0x16;  // Default XDR reg6 (22 decimal)
-
-nvs_read(0x312C, v5, 1);
 if (v5[0] == 0xFF) v5[0] = 0x84;  // Default CELL reg5
 
+nvs_read(0x3129, v5, 1);
+if (v5[0] == 0xFF) v5[0] = 0x16;  // Default CELL reg6 (22 decimal)
+
+nvs_read(0x312C, v5, 1);
+if (v5[0] == 0xFF) v5[0] = 0x84;  // Default XDR reg5
+
 nvs_read(0x312D, v5, 1);
-if (v5[0] == 0xFF) v5[0] = 0x16;  // Default CELL reg6
+if (v5[0] == 0xFF) v5[0] = 0x16;  // Default XDR reg6
 ```
 
 ---
@@ -160,12 +174,12 @@ int __fastcall sub_2DC9E(int a1, int a2, int a3, int a4)
         result = sub_3851C(&master_clock_oscillator_device_slot, 0, 0x7F, LOBYTE(v5[0]));
         
         if (!result) {
-            // Initialize XDR clock generator
+            // Initialize CELL clock generator
             LOBYTE(v5[0]) = 0;
             result = sub_38614(&cell_device_slot, 0, 3, 0);  // Init register 0
             
             if (!result) {
-                // Configure XDR reg5 (NVS 0x3128)
+                // Configure CELL reg5 (NVS 0x3128)
                 result = nvs_read(0x3128, v5, 1);
                 if (!result) {
                     if (LOBYTE(v5[0]) == 0xFF)
@@ -173,7 +187,7 @@ int __fastcall sub_2DC9E(int a1, int a2, int a3, int a4)
                     result = sub_38614(&cell_device_slot, 5, 0xFF, LOBYTE(v5[0]));
                     
                     if (!result) {
-                        // Configure XDR reg6 (NVS 0x3129)
+                        // Configure CELL reg6 (NVS 0x3129)
                         result = nvs_read(0x3129, v5, 1);
                         if (!result) {
                             if (LOBYTE(v5[0]) == 0xFF)
@@ -666,6 +680,7 @@ Boot Phase "0x400" (System Running)
 ```
 
 
+<<<<<<< HEAD
 # Part 2: Cell BE Clock Domains and Timebase
 
 ## 1. The Three Clock Domains
@@ -714,6 +729,17 @@ And **HIG Glossary, Page 221** defines:
 
 Three independent sources within the documentation all confirm the same thing.
 
+=======
+- [M4j0r](https://x.com/MinaRalwasser/) - For discovering that CELL can be overclocked in the first place via a DECR-1000A Reference Tool back in [2021](https://x.com/MinaRalwasser/status/1458862608384155650). 
+- [Nascar1243](https://youtube.com/@nascar1243) - Figuring out the offets for the CELL clock generator registers
+- [aomsin2526](https://github.com/aomsin2526/) - For his [CellOCPico](https://github.com/aomsin2526/CellOCPico) project and spearheading the idea for this to be possible without requiring external hardware
+- [RIP Felix](https://www.youtube.com/@ripfelix3020) - Attempting different values for the CELL clock generator registers
+- [villahed94](https://www.youtube.com/@villahed94/) - Attempting different values for the CELL clock generator registers
+- [Sampsonay](https://www.youtube.com/@Sampsonay/) - Attempting different values for the CELL clock generator registers
+- gypsy - Attempting different values for the CELL clock generator registers
+- [RGBeter](https://x.com/RGBeter32X) - Attempting different values for the CELL clock generator registers
+- [sage](https://codeberg.org/derg/) - This document and extensive reverse engineering of the syscon firmware
+>>>>>>> parent of 263183b (Update README.md with minor corrections and applicable models)
 ---
 
 ## 2. FlexIO and Its Clock
