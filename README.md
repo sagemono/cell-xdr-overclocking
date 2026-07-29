@@ -2490,7 +2490,6 @@ Benchmark testing confirmed that MIC_CMD_DUR (entry 16) is the only register tha
 - [M4j0r](https://x.com/MinaRalwasser/) - Discovering Cell can be overclocked via DECR-1000A back in [2021](https://x.com/MinaRalwasser/status/1458862608384155650)
 - [Nascar1243](https://youtube.com/@nascar1243) - Figuring out the offsets for the Cell clock generator registers
 - [aomsin2526](https://github.com/aomsin2526/) - [CellOCPico](https://github.com/aomsin2526/CellOCPico) project and spearheading software-based overclocking
-- [RIP Felix](https://www.youtube.com/@ripfelix3020) - Testing clock generator register values
 - [villahed94](https://www.youtube.com/@villahed94/) - Testing clock generator register values
 - [Sampsonay](https://www.youtube.com/@Sampsonay/) - Testing clock generator register values
 - [gypsy](https://www.github.com/losgatosbandidos/) - Testing clock generator register values
